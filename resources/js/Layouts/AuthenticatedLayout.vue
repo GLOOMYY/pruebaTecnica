@@ -58,6 +58,7 @@ const showingNavigationDropdown = ref(false);
                 <div class="mt-3">
                   <a :href="route('profile.edit')" class="btn btn-link">Profile</a>
                   <form :action="route('logout')" method="post" class="d-inline">
+                    @csrf
                     <button type="submit" class="btn btn-link">Log Out</button>
                   </form>
                 </div>

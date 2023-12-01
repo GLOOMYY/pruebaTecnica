@@ -49,8 +49,8 @@ const showingNavigationDropdown = ref(false);
                       </div>
 
                       <div class="mt-3">
-                          <ResponsiveNavLink :href="route('profile.edit')">Profile</ResponsiveNavLink>
-                          <ResponsiveNavLink :href="route('logout')" method="post" as="button">
+                          <ResponsiveNavLink :href="route('profile.edit')" class="btn btn-primary mb-3">Profile</ResponsiveNavLink>
+                          <ResponsiveNavLink :href="route('logout')" method="post" as="button" class="btn btn-primary">
                               Log Out
                           </ResponsiveNavLink>
                       </div>

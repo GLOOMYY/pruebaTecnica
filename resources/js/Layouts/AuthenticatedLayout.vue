@@ -11,71 +11,67 @@ const showingNavigationDropdown = ref(false);
 </script>
 
 <template>
-    <div>
+  <div>
       <div class="min-vh-100 bg-light">
-        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
-          <div class="container-fluid">
-            <div class="d-flex justify-content-between align-items-center w-100">
-              <!-- Enlace a Dashboard (A la Izquierda) -->
-              <div class="d-flex align-items-center">
-                <div class="me-auto">
-                  <a :href="route('dashboard')" :class="{ 'active': route().current('dashboard') }" class="nav-link fw-bold fs-4">
-                    Dashboard
-                  </a>
-                </div>
-              </div>
-  
-              <!-- Información del Usuario (A la Derecha) -->
-              <div class="d-flex align-items-center">
-                <div class="ms-auto">
-                  <div class="border-top pt-4 pb-1">
-                    <div>
-                      <div class="fw-bold">{{ $page.props.auth.user.name }}</div>
-                      <div class="text-muted">{{ $page.props.auth.user.email }}</div>
-                    </div>
-    
-                    <div class="mt-3">
-                      <a :href="route('profile.edit')" class="btn btn-link">Profile</a>
-                      <form :action="route('logout')" method="post" class="d-inline">
-                        <button type="submit" class="btn btn-link">Log Out</button>
-                      </form>
-                    </div>
+          <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+              <div class="container-fluid">
+                  <div class="d-flex justify-content-between align-items-center">
+                      <div class="d-flex align-items-center">
+                          <!-- Logo -->
+                          <div class="me-0 me-md-4">
+                              <Link :href="route('dashboard')">
+                                  <ApplicationLogo class="navbar-brand" />
+                              </Link>
+                          </div>
+
+                          <!-- Navigation Links -->
+                          <div class="d-none d-sm-flex me-10">
+                              <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                                  Dashboard
+                              </NavLink>
+                          </div>
+                      </div>
+
+
+
+                      
                   </div>
-                </div>
               </div>
-            </div>
-  
-            <!-- Responsive Navigation Menu -->
-            <div :class="{ 'show': showingNavigationDropdown, 'hide': !showingNavigationDropdown }" class="collapse navbar-collapse">
-              <div class="pt-2 pb-3">
-                <a :href="route('dashboard')" :class="{ 'active': route().current('dashboard') }" class="nav-link d-lg-none fw-bold fs-4">
-                  Dashboard
-                </a>
+
+              <!-- Responsive Navigation Menu -->
+              <div :class="{ show: showingNavigationDropdown, hide: !showingNavigationDropdown }">
+
+                  <!-- Responsive Settings Options -->
+                  <div class="border-top pt-4 pb-1">
+                      <div>
+                          <div class="fw-bold">{{ $page.props.auth.user.name }}</div>
+                          <div class="text-muted">{{ $page.props.auth.user.email }}</div>
+                      </div>
+
+                      <div class="mt-3">
+                          <ResponsiveNavLink :href="route('profile.edit')">Profile</ResponsiveNavLink>
+                          <ResponsiveNavLink :href="route('logout')" method="post" as="button">
+                              Log Out
+                          </ResponsiveNavLink>
+                      </div>
+                  </div>
               </div>
-    
-              <!-- Responsive Settings Options (A la Izquierda) -->
-              <div class="border-top pt-4 pb-1 d-lg-none">
-                <div class="mt-3">
-                  <a :href="route('profile.edit')" class="btn btn-link">Profile</a>
-                  <form :action="route('logout')" method="post" class="d-inline">
-                    @csrf
-                    <button type="submit" class="btn btn-link">Log Out</button>
-                  </form>
-                </div>
+          </nav>
+
+          <header class="bg-white shadow-sm" v-if="$slots.header">
+              <div class="container py-4">
+                  <slot name="header" />
               </div>
-            </div>
-          </div>
-        </nav>
-  
-        <!-- Page Content -->
-        <main>
-          <slot />
-        </main>
+          </header>
+
+          <!-- Page Content -->
+          <main>
+              <slot />
+          </main>
       </div>
-    </div>
-  </template>
-  
-  
+  </div>
+</template>
+
   
   
   
